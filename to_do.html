@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<title>To Do List</title>
+		<h1><center><u>ToDo List</u></center></h1>
+	</head>
+	<body>
+		<style>
+			h1{
+				font-size:60px;
+				font-family:Ariel;
+			}
+			label{
+				font-size:20px;
+				font-weight:900;
+				font-family:Verdana;
+				color:#0437F2;
+				font-style:oblique;
+			}
+			button{
+				background-color:#CD7F32;
+				border: #CD7F32;
+				padding: 15px 15px;
+			}
+			input{
+				border-style:dashed;;
+			}
+
+		</style>	
+		<form>
+			<label for='check1'><u><b><big>Task1</u></b></big></label>
+			<input type='text' id='task1' name='Task1' border-style: dashed>
+			<input type='CheckBox' id='check1'><br>
+			<label for='check2'><u><b><big>Task2</u></b></big></label>
+			<input type='text' id='task2' name='Task2'>
+			<input type='CheckBox' id='check2'><br>
+			<label for='check3'><u><b><big>Task3</u></b></big></label>
+			<input type='text' id='task3' name='Task3'>
+			<input type='CheckBox' id='check3'><br>
+			<label for='check4'><u><b><big>Task4</u></b></big></label>
+			<input type='text' id='task4' name='Task4'>
+			<input type='CheckBox' id='check4'><br>
+		</form><br>
+		<button onclick='reset()'> <b>All Done</b></button>
+		<script type="text/javascript">
+			var CheckBoxes = document.querySelectorAll('input[type=CheckBox]');
+			let enabledcheck = [];
+			
+			CheckBoxes.forEach(function(check){
+				check.addEventListener('change', function (e) {
+					if (e.target.checked) {
+						// get the id of the checkbox and push it to the array of enabled checks
+						enabledcheck.push(e.target.id);
+					} else {
+						// remove the id from enabled checks
+						enabledcheck = enabledcheck.filter((id) => id !== e.target.id); //map
+					}
+				})
+			});
+
+			function reset() {
+				document.getElementById('task1').value=""
+				document.getElementById('task2').value=""
+				document.getElementById('task3').value=""
+				document.getElementById('task4').value=""
+				for (let index in enabledcheck) {
+					document.getElementById(enabledcheck[index]).checked = false;
+				}
+			}
+		</script>
+	</body>
+</html>
